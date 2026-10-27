@@ -304,7 +304,7 @@ function setupOfficeMap() {
     .bindTooltip(day().depot.name).addTo(maps.office.layer);
   const pts = [[day().depot.lat, day().depot.lng], ...st.vans.flatMap((v) => v.stops.map((s) => [s.lat, s.lng]))];
   const M = maps.office;
-  M.fit = () => { M.m.invalidateSize(); M.m.fitBounds(pts, { padding: [28, 28] }); };
+  M.fit = () => { if (!el.clientWidth || !el.clientHeight) return; M.m.invalidateSize(); M.m.fitBounds(pts, { padding: [28, 28] }); };
   M.fit();
   // The map's box settles after the route list paints (and on resize / tab switch): fit again.
   M.touched = false;
@@ -658,6 +658,13 @@ document.addEventListener('click', (e) => {
   for (const k of ['controls', 'tabs', 'c-tabs', 'c-msgs', 'try']) delete keys[k];
   render();
 });
+
+// The map frames the routes again when it gets its real size: a tab opened in
+// the background, a window resize, the stage scrolling into view.
+const refit = () => { const M = maps.office; if (M && !M.touched) M.fit(); };
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') setTimeout(refit, 50); });
+let resizeT; window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(refit, 150); });
+new IntersectionObserver((en) => { if (en.some((e) => e.isIntersecting)) refit(); }).observe($('#stage'));
 
 // Plays when the stage comes into view.
 start();
