@@ -1,0 +1,55 @@
+/* Motion layer (shared). Everything here is inert until motion.js has added
+   .mo to <html>, which it never does with prefers-reduced-motion: reduce. */
+.mo-w { display: inline-block; clip-path: inset(-0.4em -0.5em -0.2em -0.5em); }
+.mo-wi { display: inline-block; will-change: translate; }
+.mo-wdone .mo-w { clip-path: none; }
+.mo-wdone .mo-wi { will-change: auto; }
+.mo-deco { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .mo-deco *, .mo-deco { animation: none !important; }
+}
+
+/* ── Ribeira ── */
+:root { --mo-ease: cubic-bezier(.16, 1, .3, 1); }
+
+/* The delivery route above the four steps. */
+.mo-route { position: relative; height: 120px; margin: -8px 0 26px; }
+.mo-road { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.mo-depot { position: absolute; left: 0; top: 52%; width: 30px; height: 26px; transform: translate(-30%, -90%); }
+.mo-depot svg, .mo-pin svg, .mo-van svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.mo-pin { position: absolute; width: 26px; height: 34px; transform: translate(-50%, -100%); transform-origin: 50% 100%; scale: 0; }
+.mo-pin.on { scale: 1; }
+.mo-pin svg { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .35)); }
+.mo-pin-ring { position: absolute; left: 50%; bottom: -5px; width: 30px; height: 10px; margin-left: -15px; border-radius: 50%; border: 2px solid #F0B48F; opacity: 0; }
+.mo-pin.on .mo-pin-ring { animation: mo-ring 2.6s ease-out infinite; }
+@keyframes mo-ring { 0% { opacity: .9; transform: scale(.3); } 70%, 100% { opacity: 0; transform: scale(1.8); } }
+.mo-van { position: absolute; left: 0; top: 0; width: 76px; height: 42px; transform-origin: 50% 86%; will-change: transform; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .35)); }
+@media (max-width: 560px) {
+  .mo-route { height: 96px; margin-bottom: 18px; }
+  .mo-van { width: 58px; height: 32px; }
+  .mo-pin { width: 22px; height: 29px; }
+}
+/* Each step lights up when the van gets there. */
+html.mo #entregas .steps img { transition: box-shadow .6s var(--mo-ease), scale .6s var(--mo-ease); }
+html.mo #entregas .steps li.mo-reached img { box-shadow: 0 0 0 3px #B4532A, 0 18px 30px -18px rgba(0, 0, 0, .7); }
+html.mo #entregas .steps b::before { transition: color .4s; }
+html.mo #entregas .steps li.mo-reached b::before { color: #fff; }
+
+/* Product cards: lift with a warm light under the pointer; the photo leans in. */
+html.mo .cat { position: relative; isolation: isolate; transition: translate .5s var(--mo-ease), box-shadow .35s, border-color .3s; }
+html.mo .cat::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgba(180, 83, 42, .12), transparent 70%); }
+html.mo .cat:hover { translate: 0 -6px; box-shadow: 0 26px 40px -28px rgba(31, 36, 33, .45); border-color: #D8C6B2; }
+html.mo .cat:hover::after { opacity: 1; }
+html.mo .cat img { transition: scale 1s var(--mo-ease); }
+html.mo .cat:hover img { scale: 1.06; }
+html.mo .steps li:hover img { scale: 1.03; }
+
+/* Buttons and links. */
+html.mo .btn-brand { position: relative; overflow: hidden; isolation: isolate; }
+html.mo .btn-brand::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .25) 50%, transparent 70%); translate: -110% 0; transition: translate .7s var(--mo-ease); }
+html.mo .btn-brand:hover::after { translate: 110% 0; }
+html.mo .nav a { background: linear-gradient(var(--brand), var(--brand)) 0 100% / 0 2px no-repeat; transition: background-size .35s var(--mo-ease), color .2s; padding-bottom: 3px; }
+html.mo .nav a:hover { background-size: 100% 2px; }
+html.mo .live-link, html.mo .ticks li { transition: translate .35s var(--mo-ease); }
+html.mo .live-link:hover { translate: 3px 0; }
