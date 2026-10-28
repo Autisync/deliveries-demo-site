@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Autisync Deliveries: live demo</title>
+  <meta name="description" content="Try Autisync Deliveries with a made-up business: the office board, the driver's phone and the customer's tracking link, running a delivery day. No sign-up.">
+  <meta property="og:title" content="Autisync Deliveries: live demo">
+  <meta property="og:description" content="The office, the driver's phone and the customer's tracking link, running a delivery day. No sign-up.">
+  <meta property="og:image" content="https://www.autisync.com/og-image.png">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#121417">
+  <link rel="icon" href="img/autisync.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script>
+    // Inside autisync.com (?embed=1): only the demo, and the page told our height.
+    if (new URLSearchParams(location.search).get('embed') === '1') {
+      document.documentElement.classList.add('embed');
+      addEventListener('DOMContentLoaded', function () {
+        var send = function () { parent.postMessage({ type: 'autisync-demo-height', h: document.documentElement.scrollHeight }, '*'); };
+        new ResizeObserver(send).observe(document.body); send();
+      });
+    }
+  </script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="https://www.autisync.com" aria-label="Autisync">
+        <img src="img/autisync.svg" alt="" width="34" height="28">
+        <span><b>Autisync</b> <span data-t="nav.product">Deliveries</span></span>
+      </a>
+      <div class="top-actions">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="pt">PT</button>
+        </div>
+        <a class="btn btn-gold cta-link" href="https://www.autisync.com/book" data-t="nav.cta">Book a 15-minute call</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <h1 data-t="hero.title">A delivery day, run from one screen.</h1>
+      <p class="lead" data-t-html="hero.text"></p>
+      <p class="note" data-t="hero.note"></p>
+    </section>
+
+    <section class="stage-wrap wrap" aria-label="Demo">
+      <div class="stage" id="stage">
+        <div class="controls" id="controls"></div>
+        <div class="tabs" role="tablist" id="tabs"></div>
+        <div class="panes">
+          <section class="pane pane-office" id="pane-office" data-pane="office">
+            <div class="pane-label" data-t="pane.office"></div>
+            <div class="window">
+              <div class="window-bar"><span></span><span></span><span></span><div class="url">app.autisync.com/deliveries</div></div>
+              <div class="office" id="office"></div>
+            </div>
+          </section>
+          <section class="pane pane-phone" id="pane-driver" data-pane="driver">
+            <div class="pane-label" id="label-driver"></div>
+            <div class="phone"><div class="screen" id="driver"></div></div>
+          </section>
+          <section class="pane pane-phone" id="pane-customer" data-pane="customer">
+            <div class="pane-label" id="label-customer"></div>
+            <div class="phone"><div class="screen" id="customer"></div></div>
+          </section>
+        </div>
+      </div>
+      <aside class="try" id="try"></aside>
+    </section>
+
+    <section class="replaces wrap">
+      <h2 data-t="rep.title">What it replaces</h2>
+      <div class="rep-grid" id="replaces"></div>
+    </section>
+
+    <section class="cta wrap">
+      <div class="cta-box">
+        <h2 data-t="cta.title"></h2>
+        <p data-t="cta.text"></p>
+        <a class="btn btn-gold btn-lg cta-link" href="https://www.autisync.com/book" data-t="nav.cta"></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <span data-t="foot.by"></span>
+    <span id="foot-demo"></span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

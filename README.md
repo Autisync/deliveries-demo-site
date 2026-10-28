@@ -1,32 +1,33 @@
-# Autisync Deliveries: live demo
+# Ribeira Materiais: demo builders' merchant website
 
-A public, no-login demo of Autisync Deliveries. A made-up business runs a delivery
-morning in the browser: the office board, the driver's phone and a customer's phone,
-side by side (tabs on a phone). English and Portuguese (`?lang=en` / `?lang=pt`;
-it picks from the browser language the first time).
+The website of **Ribeira Materiais**, an invented builders' merchant in Lisbon
+(Marvila) that runs its orders, vans and customer tracking on Autisync. It is
+the "real business" side of the Autisync Deliveries demo:
 
-Nothing is sent anywhere: the whole day is simulated in the page (`src/sim.js`).
-The map uses OpenStreetMap tiles and Leaflet from cdnjs.
+- **The order form** sends the order to the CRM account
+  *Ribeira Materiais de Construção (Demo)* as a new lead.
+- **"See a delivery on its way"** opens a real tracking page in the CRM, for
+  the demo delivery that is on the way today.
+- **/demo/** is the interactive simulation of a delivery day (office board,
+  driver's phone, customer's phone), the same one shown on
+  autisync.com/crm/deliveries.
 
-## Files
+Portuguese by default, English with the PT / EN switch (or `?lang=en`).
 
-- `src/index.html`, `src/styles.css`: the page
-- `src/app.js`: draws the three screens and handles taps
-- `src/sim.js`: the clock, the vans, ETAs, late alerts, replies to the customer
-- `src/data.js`: the two made-up days (London / Lisbon): vans, stops, the email order
-- `src/i18n.js`: every word, in English and Portuguese
-- `build.mjs`: copies `src/` to `dist/` and writes `dist/config.js`
+## The CRM side
 
-## Run it locally
+```
+docker compose exec crm-backend npm run demo:business -- merchant            # once
+docker compose exec crm-backend npm run demo:business -- merchant --refresh  # today's deliveries again
+```
 
-    node build.mjs
-    npx serve dist        # or: python3 -m http.server -d dist 5600
+Run `--refresh` each morning (or every hour during the day) so the board and
+the tracking page show today.
 
-## Deploy (Vercel)
+## Vercel
 
-Import the repo in Vercel. No framework, no install; `vercel.json` sets the build
-(`node build.mjs`) and output (`dist`). Optional environment variables:
+Import this repository, framework preset **Other**. The build settings are in
+`vercel.json`. Optional environment variables: `CRM_API_URL`, `CRM_APP_URL`,
+`SITE_SLUG`, `TRACK_TOKEN` (see `build.mjs`).
 
-- `CTA_URL_EN`: where "Book a 15-minute call" goes (default `https://www.autisync.com/book`)
-- `CTA_URL_PT`: the Portuguese one (default `https://www.autisync.com/pt/marcar`)
-- `SITE_URL`: the site address for link previews (defaults to the Vercel production domain)
+Photos: Pexels (free to use), loaded from images.pexels.com.

@@ -1,91 +1,218 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Autisync Deliveries: live demo</title>
-  <meta name="description" content="Try Autisync Deliveries with a made-up business: the office board, the driver's phone and the customer's tracking link, running a delivery day. No sign-up.">
-  <meta property="og:title" content="Autisync Deliveries: live demo">
-  <meta property="og:description" content="The office, the driver's phone and the customer's tracking link, running a delivery day. No sign-up.">
-  <meta property="og:image" content="/og.png">
-  <meta name="theme-color" content="#121417">
-  <link rel="icon" href="/img/autisync.svg" type="image/svg+xml">
+  <title>Ribeira Materiais | Materiais de construção com entrega em Lisboa</title>
+  <meta name="description" content="Cimento, tijolo, areia, cerâmica e ferramentas, entregues na obra em Lisboa numa janela de 2 horas, com seguimento da carrinha no telemóvel. Site de demonstração da Autisync.">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Ribeira Materiais: entregas na obra, à hora marcada">
+  <meta property="og:description" content="Um armazém de materiais de construção a trabalhar com o Autisync: encomendas, carrinhas, seguimento e faturas. Empresa de demonstração.">
+  <meta property="og:image" content="https://images.pexels.com/photos/29817952/pexels-photo-29817952.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop">
+  <meta name="theme-color" content="#1F2421">
+  <link rel="icon" href="img/ribeira.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="/styles.css">
-  <script src="/config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
 </head>
 <body>
+  <div class="demo-bar">
+    <span data-t="demo.bar">Site de demonstração: a Ribeira Materiais é uma empresa inventada, a trabalhar com o CRM e as entregas da Autisync.</span>
+    <a href="https://www.autisync.com/crm/entregas" data-href-en="https://www.autisync.com/crm/deliveries" data-t="demo.link">Ver como funciona</a>
+  </div>
+
   <header class="top">
     <div class="wrap top-in">
-      <a class="brand" href="https://www.autisync.com" aria-label="Autisync">
-        <img src="/img/autisync.svg" alt="" width="34" height="28">
-        <span><b>Autisync</b> <span data-t="nav.product">Deliveries</span></span>
+      <a class="brand" href="#inicio" aria-label="Ribeira Materiais">
+        <img src="img/ribeira.svg" alt="" width="40" height="40">
+        <span><b>Ribeira</b> Materiais</span>
       </a>
-      <div class="top-actions">
-        <div class="lang" role="group" aria-label="Language">
-          <button type="button" data-lang="en">EN</button>
+      <nav class="nav" aria-label="Menu">
+        <a href="#produtos" data-t="nav.products">Produtos</a>
+        <a href="#entregas" data-t="nav.deliveries">Entregas</a>
+        <a href="#seguir" data-t="nav.track">Seguir entrega</a>
+        <a href="#contactos" data-t="nav.contact">Contactos</a>
+      </nav>
+      <div class="top-act">
+        <div class="lang" role="group" aria-label="Idioma / Language">
           <button type="button" data-lang="pt">PT</button>
+          <button type="button" data-lang="en">EN</button>
         </div>
-        <a class="btn btn-gold cta-link" href="https://www.autisync.com/book" data-t="nav.cta">Book a 15-minute call</a>
+        <a class="btn btn-brand" href="#encomendar" data-t="nav.order">Encomendar</a>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero wrap">
-      <h1 data-t="hero.title">A delivery day, run from one screen.</h1>
-      <p class="lead" data-t-html="hero.text"></p>
-      <p class="note" data-t="hero.note"></p>
+  <main id="inicio">
+    <section class="hero">
+      <img class="hero-img" src="https://images.pexels.com/photos/29817952/pexels-photo-29817952.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" fetchpriority="high">
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <p class="kicker" data-t="hero.kicker">Armazém em Marvila · Entregas em Lisboa</p>
+          <h1 data-t="hero.title">Na obra à hora marcada.</h1>
+          <p class="lead" data-t="hero.lead">Cimento, tijolo, areia, cerâmica e ferramentas. Encomende até às 18h e entregamos no dia seguinte numa janela de 2 horas. Quando a carrinha sai, recebe um link para a seguir no telemóvel.</p>
+          <div class="cta-row">
+            <a class="btn btn-brand btn-lg" href="#encomendar" data-t="hero.order">Encomendar com entrega</a>
+            <a class="btn btn-light btn-lg" href="#seguir" data-t="hero.track">Seguir a minha entrega</a>
+          </div>
+        </div>
+        <aside class="live-card" aria-label="Entrega a caminho">
+          <div class="live-top"><span class="dot"></span><span data-t="live.label">Agora, na Av. de Roma</span></div>
+          <p class="live-ref">E-2102 · Obras Sá &amp; Filhos</p>
+          <p class="live-title" data-t="live.title">2 m³ de areia lavada e 20 sacos de cimento</p>
+          <div class="live-steps">
+            <span class="on" data-t="live.s1">Carregada</span>
+            <span class="on" data-t="live.s2">A caminho</span>
+            <span data-t="live.s3">Entregue</span>
+          </div>
+          <a class="live-link" data-track-demo href="#" target="_blank" rel="noopener" data-t="live.link">Abrir o seguimento real desta entrega</a>
+        </aside>
+      </div>
     </section>
 
-    <section class="stage-wrap wrap" aria-label="Demo">
-      <div class="stage" id="stage">
-        <div class="controls" id="controls"></div>
-        <div class="tabs" role="tablist" id="tabs"></div>
-        <div class="panes">
-          <section class="pane pane-office" id="pane-office" data-pane="office">
-            <div class="pane-label" data-t="pane.office"></div>
-            <div class="window">
-              <div class="window-bar"><span></span><span></span><span></span><div class="url">app.autisync.com/deliveries</div></div>
-              <div class="office" id="office"></div>
-            </div>
-          </section>
-          <section class="pane pane-phone" id="pane-driver" data-pane="driver">
-            <div class="pane-label" id="label-driver"></div>
-            <div class="phone"><div class="screen" id="driver"></div></div>
-          </section>
-          <section class="pane pane-phone" id="pane-customer" data-pane="customer">
-            <div class="pane-label" id="label-customer"></div>
-            <div class="phone"><div class="screen" id="customer"></div></div>
-          </section>
+    <section class="facts">
+      <div class="wrap facts-in">
+        <div><b data-t="f1.b">Janela de 2 horas</b><span data-t="f1.s">Escolhe o dia e a manhã ou a tarde</span></div>
+        <div><b data-t="f2.b">Siga a carrinha</b><span data-t="f2.s">Link por SMS quando sai do armazém</span></div>
+        <div><b data-t="f3.b">Prova de entrega</b><span data-t="f3.s">Foto, assinatura e hora, no seu email</span></div>
+        <div><b data-t="f4.b">Fatura na entrega</b><span data-t="f4.s">Com link para pagar por cartão</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="wrap">
+        <div class="head">
+          <h2 data-t="prod.title">O que entregamos</h2>
+          <p data-t="prod.sub">Preços de balcão com IVA. Para obra, pedimos orçamento por quantidades e entregamos por fases.</p>
+        </div>
+        <div class="cats">
+          <article class="cat">
+            <img loading="lazy" src="https://images.pexels.com/photos/29817952/pexels-photo-29817952.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" data-alt="cat.cement.alt">
+            <div><h3 data-t="cat.cement">Cimento e argamassas</h3><p data-t="cat.cement.d">Cimento CEM II 32,5, cimento-cola, cal hidráulica.</p><span class="price" data-t="cat.cement.p">desde 5,90 € / saco</span></div>
+          </article>
+          <article class="cat">
+            <img loading="lazy" src="https://images.pexels.com/photos/39084066/pexels-photo-39084066.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" data-alt="cat.brick.alt">
+            <div><h3 data-t="cat.brick">Tijolo e blocos</h3><p data-t="cat.brick.d">Tijolo 30x20 de 11 e 15, blocos de betão, por palete.</p><span class="price" data-t="cat.brick.p">desde 92 € / palete</span></div>
+          </article>
+          <article class="cat">
+            <img loading="lazy" src="https://images.pexels.com/photos/12278585/pexels-photo-12278585.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" data-alt="cat.yard.alt">
+            <div><h3 data-t="cat.yard">Areias, britas e madeira</h3><p data-t="cat.yard.d">Areia lavada e fina, brita, cofragem e barrotes.</p><span class="price" data-t="cat.yard.p">desde 38 € / m³</span></div>
+          </article>
+          <article class="cat">
+            <img loading="lazy" src="https://images.pexels.com/photos/38575493/pexels-photo-38575493.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" data-alt="cat.tools.alt">
+            <div><h3 data-t="cat.tools">Ferramentas e acabamentos</h3><p data-t="cat.tools.d">Ferramenta manual e elétrica, tintas, cerâmica e cola.</p><span class="price" data-t="cat.tools.p">Mais de 4.000 artigos</span></div>
+          </article>
         </div>
       </div>
-      <aside class="try" id="try"></aside>
     </section>
 
-    <section class="replaces wrap">
-      <h2 data-t="rep.title">What it replaces</h2>
-      <div class="rep-grid" id="replaces"></div>
+    <section class="section dark" id="entregas">
+      <div class="wrap">
+        <div class="head">
+          <h2 data-t="how.title">Como funcionam as entregas</h2>
+          <p data-t="how.sub">Do armazém à sua obra, sem telefonemas para saber onde está a carrinha.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <img loading="lazy" src="https://images.pexels.com/photos/4487383/pexels-photo-4487383.jpeg?auto=compress&cs=tinysrgb&w=700" alt="">
+            <b data-t="how.1">Encomenda</b><p data-t="how.1d">Pelo site, por email ou WhatsApp. Confirmamos o dia e a janela de entrega.</p>
+          </li>
+          <li>
+            <img loading="lazy" src="https://images.pexels.com/photos/29491402/pexels-photo-29491402.jpeg?auto=compress&cs=tinysrgb&w=700" alt="">
+            <b data-t="how.2">Carregamos</b><p data-t="how.2d">Cada volume tem uma etiqueta com QR, lida ao entrar na carrinha. Nada fica para trás.</p>
+          </li>
+          <li>
+            <img loading="lazy" src="https://images.pexels.com/photos/6407628/pexels-photo-6407628.jpeg?auto=compress&cs=tinysrgb&w=700" alt="">
+            <b data-t="how.3">A caminho</b><p data-t="how.3d">Recebe um link para seguir a carrinha e a hora de chegada. Se houver atraso, avisamos.</p>
+          </li>
+          <li>
+            <img loading="lazy" src="https://images.pexels.com/photos/6869055/pexels-photo-6869055.jpeg?auto=compress&cs=tinysrgb&w=700" alt="">
+            <b data-t="how.4">Entregue</b><p data-t="how.4d">Foto, assinatura e hora, e a fatura com link de pagamento no seu email.</p>
+          </li>
+        </ol>
+      </div>
     </section>
 
-    <section class="cta wrap">
-      <div class="cta-box">
-        <h2 data-t="cta.title"></h2>
-        <p data-t="cta.text"></p>
-        <a class="btn btn-gold btn-lg cta-link" href="https://www.autisync.com/book" data-t="nav.cta"></a>
+    <section class="section" id="seguir">
+      <div class="wrap track">
+        <div>
+          <h2 data-t="track.title">Seguir a minha entrega</h2>
+          <p data-t="track.sub">Quando a carrinha sai, enviamos-lhe um link por SMS e email. Abra-o para ver a carrinha no mapa e a hora de chegada.</p>
+          <p class="note" data-t="track.note">Nesta demonstração pode abrir o seguimento real de uma entrega que está a caminho agora.</p>
+          <div class="cta-row">
+            <a class="btn btn-brand btn-lg" data-track-demo href="#" target="_blank" rel="noopener" data-t="track.open">Ver uma entrega a caminho</a>
+            <a class="btn btn-outline btn-lg" href="demo/index.html?lang=pt" data-href-en="demo/index.html?lang=en" data-t="track.sim">Ver um dia de entregas por dentro</a>
+          </div>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phone-in">
+            <div class="ph-head"><span class="ph-logo">R</span><b>Ribeira Materiais</b><small>E-2102</small></div>
+            <div class="ph-card">
+              <b data-t="ph.title">A sua entrega está a caminho</b>
+              <small data-t="ph.eta">Chega por volta das</small>
+              <span class="ph-time" data-eta>10:40</span>
+              <div class="ph-steps"><i class="on"></i><i class="on"></i><i></i></div>
+            </div>
+            <div class="ph-map"><span class="ph-route"></span><span class="ph-van"></span><span class="ph-pin"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sand" id="encomendar">
+      <div class="wrap order">
+        <div>
+          <h2 data-t="order.title">Encomendar com entrega</h2>
+          <p data-t="order.sub">Diga-nos o que precisa, a morada e o dia. Confirmamos a encomenda, o preço e a janela de entrega ainda hoje.</p>
+          <ul class="ticks">
+            <li data-t="order.t1">Entrega em Lisboa a partir de 25 €; grátis acima de 400 €</li>
+            <li data-t="order.t2">Carrinha com grua para paletes e andares</li>
+            <li data-t="order.t3">Contas a 30 dias para empreiteiros</li>
+          </ul>
+        </div>
+        <form class="form" data-enquiry="Encomenda com entrega" novalidate>
+          <div class="row2">
+            <label><span data-t="form.name">Nome</span><input name="fullName" autocomplete="name" required></label>
+            <label><span data-t="form.phone">Telemóvel</span><input name="phone" type="tel" autocomplete="tel" required></label>
+          </div>
+          <label><span data-t="form.email">Email</span><input name="email" type="email" autocomplete="email" required></label>
+          <div class="row2">
+            <label><span data-t="form.address">Morada da obra</span><input name="address" autocomplete="street-address"></label>
+            <label><span data-t="form.day">Dia</span><input name="day" type="date"></label>
+          </div>
+          <label><span data-t="form.what">O que precisa</span><textarea name="what" rows="4" data-ph="form.whatPh" placeholder="Ex.: 30 sacos de cimento, 2 paletes de tijolo 30x20x15"></textarea></label>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-brand btn-lg" type="submit" data-t="form.send">Enviar encomenda</button>
+          <p class="status" data-status role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="contactos">
+      <div class="wrap contact">
+        <div>
+          <h2 data-t="contact.title">Armazém e balcão</h2>
+          <p>Rua do Açúcar 88, 1950-010 Lisboa (Marvila)</p>
+          <p data-t="contact.hours">Segunda a sexta 7:30–18:00 · Sábado 8:00–13:00</p>
+          <p>+351 210 000 088 · encomendas@ribeira-materiais.example</p>
+        </div>
+        <img loading="lazy" src="https://images.pexels.com/photos/36463675/pexels-photo-36463675.jpeg?auto=compress&cs=tinysrgb&w=900" alt="">
       </div>
     </section>
   </main>
 
-  <footer class="foot wrap">
-    <span data-t="foot.by"></span>
-    <span id="foot-demo"></span>
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <span>© <span data-year></span> Ribeira Materiais (demo)</span>
+      <span data-t="foot.photos">Fotografias: Pexels</span>
+      <a class="powered" href="https://www.autisync.com/crm/entregas" data-href-en="https://www.autisync.com/crm/deliveries">
+        <span data-t="foot.powered">Encomendas, carrinhas e seguimento com</span> <b>Autisync</b>
+      </a>
+    </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script type="module" src="/app.js"></script>
+  <script src="site.js"></script>
 </body>
 </html>
